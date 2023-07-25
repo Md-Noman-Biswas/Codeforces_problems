@@ -1,0 +1,6 @@
+*.txt
+.vscode/
+output/
+*.exe
+.cph/
+*.prob
