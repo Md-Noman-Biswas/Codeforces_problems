@@ -1,21 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-const ll N = 1e5;
 void solve(){
     ll n;
     cin >> n;
-    ll cnt = 0;
-    ll ans = -1;
-    for(int i=1; i<=100; i++){
-        if(n % i == 0){
-            cnt++;
-        }else{
-            cnt = 0;
-        }
-        ans = max(ans, cnt);
+    vector<ll> arr(n);
+    ll sum = 0;
+    for(int i=0; i<n; i++){
+        cin >> arr[i];
+        sum += arr[i];
     }
-    cout << ans << "\n";
+    //cout << sum << "\n";
+    if(sum % 2 == 0){
+        cout << "YES" << "\n";
+    }else{
+        cout << "NO" << "\n";
+    }
 }
 signed main(){
     ios_base::sync_with_stdio(false);
