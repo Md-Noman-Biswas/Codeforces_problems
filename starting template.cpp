@@ -4,9 +4,7 @@ using namespace std;
 #define nl "\n"
 
 void solve(){
-    int n;
-    cin >> n;
-    cout << 1 << " " << n-1 << "\n";
+   
 }
 signed main(){
     ios_base::sync_with_stdio(false);

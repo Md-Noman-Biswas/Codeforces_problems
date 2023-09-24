@@ -14,8 +14,7 @@ void solve(){
         sum += x;
     }
     double ans = (sum/n)*100;
-    printf("%.12lf", ans);
-    
+    cout << fixed << setprecision(12) << ans << "\n";
     
 }
    

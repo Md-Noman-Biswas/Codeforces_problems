@@ -4,9 +4,18 @@ using namespace std;
 #define nl "\n"
 
 void solve(){
-    int n;
-    cin >> n;
-    cout << 1 << " " << n-1 << "\n";
+    int n, d; 
+    cin >> n >> d;
+    string s;
+    cin >> s;
+    int ans = 0;
+    for(int i=0; i<s.size(); i++){
+        if(s[i] == 'B'){
+            ans++;
+            i += (d-1);
+        }
+    }
+    cout << ans << "\n";
 }
 signed main(){
     ios_base::sync_with_stdio(false);

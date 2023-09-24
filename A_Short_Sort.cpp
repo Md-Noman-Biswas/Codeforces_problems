@@ -4,10 +4,25 @@ using namespace std;
 #define nl "\n"
 
 void solve(){
-    int n;
-    cin >> n;
-    cout << 1 << " " << n-1 << "\n";
+    string s;
+    cin >> s;
+    int v=0;
+    if(s[0] != 'a'){
+        v++;
+    }
+    if(s[1] != 'b'){
+        v++;
+    }
+    if(s[2] != 'c'){
+        v++;
+    }
+    if(v > 2){
+        cout << "NO" << nl;
+    }else{
+        cout << "YES" << nl;
+    }
 }
+
 signed main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
