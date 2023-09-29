@@ -5,20 +5,34 @@ const int N = 1e5;
 void solve(){
     int n;
     cin >> n;
-    vector<int> v(n);
-    
-    // Initialize an array to store frequencies of elements
-    vector<int> freq(N, 0);
-    
+    map<int, int> mp;
     for(int i=0; i<n; i++){
-        cin >> v[i];
-        freq[v[i] - 1]++;  // Subtract 1 to get the correct index and increment the frequency count
+        int x;
+        cin >> x;
+        mp[x]++;
     }
-    
-    for(int i=0; i<n; i++){
-        cout << v[i] << "-> " << freq[v[i] - 1] << " "; // Subtract 1 to get the correct index and print the frequency
+
+    priority_queue<int> q;
+
+    for(auto it: mp){
+        q.push(it.second);
     }
-    cout << "\n";
+
+    while(q.size() >= 2){
+        int a = q.top();
+        q.pop();
+        int b = q.top();
+        q.pop();
+        a--;
+        b--;
+        if(a) q.push(a);
+        if(b) q.push(b);
+    }
+    if(q.size() == 1){
+        cout << q.top() << "\n";
+    }else{
+        cout << q.size() << "\n";
+    }
     
 }
 signed main(){
