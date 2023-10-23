@@ -3,28 +3,20 @@ using namespace std;
 #define ll long long
 #define nl "\n"
 
-ll n, k;
-
-bool valid(ll mid){
-    ll not_divisible = mid - mid / n;
-    return not_divisible >= k;
-}
-
-
 void solve(){
-    cin >> n >> k;
-    ll l = 1;
-    ll h = 2e9;
+    ll a, b, n;
+    cin >> a >> b >> n;
+    vector<ll> arr(n);
     ll ans = 0;
-    while(l <= h){
-        ll mid = l + (h-l)/2;
-        if(valid(mid)){
-            ans = mid;
-            h = mid - 1;
+    for(int i=0; i<n; i++){
+        cin >> arr[i];
+        if(arr[i] <= a - 1){
+            ans += arr[i];
         }else{
-            l = mid + 1;
+            ans += (a-1);
         }
-    }   
+    }
+    ans += min(b,a);
     cout << ans << nl;
 }
 

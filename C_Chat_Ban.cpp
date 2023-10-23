@@ -1,43 +1,52 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+#define ll long long
+#define nl "\n"
 
-#define int long long
-#define endl "\n"
+ll k, x;
 
-int f(int k, int x, int mid){
-    int messeges = 0;
-    if(mid > k) {
-        int diff = mid - k;
-        int val = k - diff;
-        messeges = (k*k - (val*(val+1))/2);
+bool predicate(ll mid){
+    ll total_emotes = k*k;
+    ll emotes = 0;
+    if(mid <= k){
+        emotes = mid * (mid + 1)/2;
+    }else{
+        ll temp = mid - k;
+        ll lower_part = k - temp - 1;
+        emotes = total_emotes - (lower_part * (lower_part + 1)/2);
     }
-    else{
-        messeges = (mid*(mid-1))/2;
-    }
-    return messeges < x;
-
+    return emotes < x;
 }
 
-int32_t main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    int t; cin >> t;
-    // cout << "Hola" << endl;
-    while(t--){
-        int k, x; cin >> k >> x;
-        int l = 1, r = 2 * k - 1, ans = 0;
-        while (l <= r) {
-            int mid = (l + r)/ 2;
-            if (f(k, x, mid)) {
-                ans = mid;
-                l = mid + 1;
-            }
-            else {
-                r = mid - 1;
-            }
+void solve(){
+    cin >> k >> x;
+    ll l = 0;
+    ll r = 2 * k - 1;
+    ll ans = 0;
+    if(k * k <= x){
+        cout << 2 * k - 1 << nl;
+        return;
+    }
+    while(l <= r){
+        ll mid = l + (r - l) / 2;
+        if(predicate(mid)){
+            ans = mid;
+            l = mid + 1;
+        }else{
+            r = mid - 1;
         }
-        cout << ans << endl;
+    }
+    cout << ++ans << nl;
+}
+
+signed main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
     }
     return 0;
 }

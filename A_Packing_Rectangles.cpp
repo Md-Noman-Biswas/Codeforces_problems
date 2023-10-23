@@ -4,31 +4,28 @@ using namespace std;
 #define nl "\n"
 ll w, h, n;
 
-bool pre(ll mid){
-    ll nm1 = mid/w;
-    ll nm2 = mid/h;
-    return nm1 * nm2 >= n;
+bool f(ll mid){
+    ll x = mid/w;
+    ll y = mid/h;
+    return x * y >= n;
 }
-
 
 void solve(){
     cin >> w >> h >> n;
     ll l = 0;
     ll r = 1;
-
-    while(pre(r) == false){
+    while(f(r) == false){
         r *= 2;
-    } 
-
-    while(r - l > 1){
+    }
+    while(l < r){
         ll mid = l + (r-l)/2;
-        if(pre(mid)){
+        if(f(mid)){
             r = mid;
         }else{
-            l = mid;
+            l = mid + 1;
         }
     }
-    cout << r << nl;
+    cout << l << nl;
 }
 
 signed main(){
