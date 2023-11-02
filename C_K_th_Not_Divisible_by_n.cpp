@@ -10,7 +10,6 @@ bool valid(ll mid){
     return not_divisible >= k;
 }
 
-
 void solve(){
     cin >> n >> k;
     ll l = 1;
