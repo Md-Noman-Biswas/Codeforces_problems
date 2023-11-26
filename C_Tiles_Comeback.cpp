@@ -19,7 +19,7 @@ void solve(){
     // for(auto it: suffix){
     //     cout << it << " ";
     // }
-        for(int i=0; i<n; i++){
+    for(int i=0; i<n; i++){
         if(arr[i] == arr[n-1]){
             cntL++;
         }
