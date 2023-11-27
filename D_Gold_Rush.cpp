@@ -1,45 +1,24 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define ll long long
+#define nl "\n"
+
+map<ll, bool> mp;
+
+bool curse(ll n, ll m){
+    mp[n] = true;
+    if(n == m) return true;
+    if(n%3 != 0) return false;
+    return (curse(n/3, m) || curse(2*1LL*n/3, m)); 
+}
+
 void solve(){
-    int n,m;
+    ll n, m;
     cin >> n >> m;
-    while(n%2 == 0#include <iostream>
-using namespace std;
-
-bool can_split_into_pile_of_size_n(int n, int x) {
-    while (n % 2 == 0) {
-        n /= 2;
-    }
-    while (x % 2 == 0) {
-        x /= 2;
-    }
-    return x % n == 0;
-}
-
-int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        int n, m;
-        cin >> n >> m;
-        if (can_split_into_pile_of_size_n(n, m)) {
-            cout << "YES\n";
-        } else {
-            cout << "NO\n";
-        }
-    }
-    return 0;
-}
-
-        n/=2;
-    }
-    while(m%2 == 0){
-        m/=2;
-    }
-    if(n%m == 0 ){
-        cout << "YES" << "\n";
+    if(curse(n,m)){
+        cout << "YES" << nl;
     }else{
-        cout << "NO" << "\n";
+        cout << "NO" << nl;
     }
 }
 signed main(){
@@ -49,6 +28,7 @@ signed main(){
     int t;
     cin >> t;
     while(t--) {
+        mp.clear();
         solve();
     }
     return 0;
