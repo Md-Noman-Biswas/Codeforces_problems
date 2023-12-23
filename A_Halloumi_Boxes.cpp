@@ -3,23 +3,22 @@ using namespace std;
 #define ll long long
 #define nl "\n"
 
-map<ll, bool> mp;
-
-bool curse(ll n, ll m){
-    mp[n] = true;
-    if(n == m) return true;
-    if(n%3 != 0) return false;
-    return (curse(n/3, m) || curse(2*1LL*n/3, m)); 
-}
-
 void solve(){
-    ll n, m;
-    cin >> n >> m;
-    if(curse(n,m)){
+    ll n, k;
+    cin >> n >> k;
+    vector<ll> arr(n);
+    for(int i=0; i<n; i++) cin >> arr[i];
+    bool flag = is_sorted(arr.begin(), arr.end());
+    if(flag){
         cout << "YES" << nl;
-    }else{
-        cout << "NO" << nl;
+        return;
     }
+    if(k == 1){
+        cout << "NO" << nl;
+    }else{
+        cout << "YES" << nl;
+    }
+
 }
 
 signed main(){
@@ -29,7 +28,6 @@ signed main(){
     int t;
     cin >> t;
     while(t--) {
-        mp.clear();
         solve();
     }
     return 0;

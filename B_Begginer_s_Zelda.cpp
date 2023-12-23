@@ -8,32 +8,36 @@ using namespace std;
 #define mod 1000000007
 const int N = 1e5 + 7;
 
-bool cmp(pair<string, int> p1, pair<string, int> p2){
-        return p1.second > p2.second;
-}
 
 void solve(){
     ll n;
     cin >> n;
-    map<string, int> mp;
-    for(int i=0; i<n; i++){
-        string s;
-        cin >> s;
-        mp[s]++;
+    ll mx = 1;
+    map<ll, ll> mp;
+    for(int i=0; i<n-1; i++){
+        ll v1, v2;
+        cin >> v1 >> v2;
+        mp[v1]++;
+        mp[v2]++;
     }
-    vector<pair<string, int>> v;
 
+    int cnt = 0;
     for(auto it: mp){
-        v.push_back({it.first, it.second});
+        if(it.second == 1){
+            cnt++;
+        }
     }
-    sort(v.begin(), v.end(), cmp);
-    cout << v[0].first << nl;
+    cout << (cnt + 1)/2 << nl;
 }
 
 signed main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    solve();
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
+    }
     return 0;
 }
