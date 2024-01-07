@@ -11,18 +11,22 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, k;
-    cin >> n >> k;
-    if(n > k){
-        if(n % 2 == k % 2){
-            cout << 0 << nl;
-        }else{
-            cout << 1 << nl;
-        }
-    }else{
-        cout << k - n << nl;
+    ll x, n, m, initial;
+    cin >> initial >> n >> m;
+    x = initial;
+
+    while(x > 0 && n > 0 && x/2 + 10 < x){
+        x /= 2;
+        x += 10;
+        n--;
     }
     
+    x -= (10*m);
+    if (x <= 0) {
+        YES;
+    } else {
+        NO;
+    }
 }
 
 signed main(){
@@ -31,7 +35,7 @@ signed main(){
     cout.tie(0);
     int t;
     cin >> t;
-    while(t--) {
+    while (t--) {
         solve();
     }
     return 0;

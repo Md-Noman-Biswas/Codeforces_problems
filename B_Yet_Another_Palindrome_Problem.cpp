@@ -8,21 +8,31 @@ using namespace std;
 #define llmx LONG_LONG_MAX
 #define llmn LONG_LONG_MIN
 #define mod 1000000007
-const int N = 1e5 + 7;
+const int N = 5000+7;
 
 void solve(){
-    ll n, k;
-    cin >> n >> k;
-    if(n > k){
-        if(n % 2 == k % 2){
-            cout << 0 << nl;
-        }else{
-            cout << 1 << nl;
-        }
-    }else{
-        cout << k - n << nl;
+    ll n;
+    cin >> n;
+    vector<ll> v[N];
+    for(int i=0; i<n; i++){
+        int x;
+        cin >> x;
+        v[x].push_back(i);
     }
-    
+    bool flag = false;
+    for(auto it: v){
+        if(!it.empty()){
+            if(abs(it.back() - it.front()) > 1){
+                flag = true;
+                break;
+            }
+        }
+    }
+    if(flag){
+        YES;
+    }else{
+        NO;
+    }
 }
 
 signed main(){

@@ -11,18 +11,13 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, k;
-    cin >> n >> k;
-    if(n > k){
-        if(n % 2 == k % 2){
-            cout << 0 << nl;
-        }else{
-            cout << 1 << nl;
-        }
+    ll a, b;
+    cin >> a >> b;
+    if((a + b) % 2 != 0){
+        cout << "Alice" << nl;
     }else{
-        cout << k - n << nl;
+        cout << "Bob" << nl;
     }
-    
 }
 
 signed main(){

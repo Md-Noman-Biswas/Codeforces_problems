@@ -11,19 +11,21 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, k;
-    cin >> n >> k;
-    if(n > k){
-        if(n % 2 == k % 2){
-            cout << 0 << nl;
-        }else{
-            cout << 1 << nl;
+    ll n;
+    cin >> n;
+    vector<ll> arr(n+1);
+    for(int i=1; i<=n; i++) cin >> arr[i];
+    vector<ll> brr(n+1, 0);
+    for(int i=n; i>0; i--){
+        brr[i] = arr[i];
+        if(i + arr[i] <= n){
+            brr[i] += brr[i+arr[i]];
         }
-    }else{
-        cout << k - n << nl;
     }
-    
-}
+    sort(brr.begin(), brr.end());
+    cout << brr.back() << nl;
+
+}  
 
 signed main(){
     ios_base::sync_with_stdio(false);

@@ -11,28 +11,28 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, k;
-    cin >> n >> k;
-    if(n > k){
-        if(n % 2 == k % 2){
-            cout << 0 << nl;
-        }else{
-            cout << 1 << nl;
-        }
-    }else{
-        cout << k - n << nl;
+    ll n;
+    cin >> n; 
+    vector<ll> arr(n);
+    map<ll, ll> mp;
+    for(int i=0; i<n; i++){
+        cin >> arr[i];
+        mp[arr[i]]++;
     }
-    
+    ll cnt = 0;
+    if(mp.size() > 2){
+        for(auto it = next(mp.begin()); it != prev(mp.end()); it++){
+        cnt += it->second;
+    }
+    }
+    cout << cnt << nl;
+
 }
 
 signed main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    int t;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
     return 0;
 }

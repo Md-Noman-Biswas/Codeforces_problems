@@ -11,18 +11,15 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, k;
-    cin >> n >> k;
-    if(n > k){
-        if(n % 2 == k % 2){
-            cout << 0 << nl;
-        }else{
-            cout << 1 << nl;
-        }
-    }else{
-        cout << k - n << nl;
+    ll n;
+    cin >> n;
+    string s;
+    cin >> s;
+    map<char, ll> mp;
+    for(int i=0; i<n; i++){
+        mp[s[i]]++;
     }
-    
+    cout << abs(mp['+'] - mp['-']) << nl;
 }
 
 signed main(){

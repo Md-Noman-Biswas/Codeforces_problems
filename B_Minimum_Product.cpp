@@ -10,18 +10,21 @@ using namespace std;
 #define mod 1000000007
 const int N = 1e5 + 7;
 
+ll check(ll a, ll b, ll x, ll y, ll n){
+    ll temp1 = min(a - x, n);
+    a -= temp1;
+    n -= temp1;
+    ll temp2 = min(b - y, n);
+    b -= temp2;
+    n -= temp2;
+    return a*b;
+}
+
 void solve(){
-    ll n, k;
-    cin >> n >> k;
-    if(n > k){
-        if(n % 2 == k % 2){
-            cout << 0 << nl;
-        }else{
-            cout << 1 << nl;
-        }
-    }else{
-        cout << k - n << nl;
-    }
+    ll a, b, x, y, n;
+    cin >> a >> b >> x >> y >> n;
+    ll ans = min(check(a, b, x, y, n), check(b,  a, y, x, n));
+    cout << ans << nl;
     
 }
 

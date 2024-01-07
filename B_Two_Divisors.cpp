@@ -14,10 +14,12 @@ void solve(){
     ll cnt = 0;
     ll x = __gcd(a, b);
     ll temp = (a*b)/x;
+
     if(b % a == 0){
         ll xd = temp / a;
         temp = xd * b;
     }
+    
     cout << temp << nl;  
 }
 

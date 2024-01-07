@@ -44,7 +44,7 @@ void solve(){
                 fifty--;
                 st.pop();
                 st.pop();
-                five--;
+                five--; 
             }
             else{
                 st.pop();

@@ -13,16 +13,20 @@ const int N = 1e5 + 7;
 void solve(){
     ll n, k;
     cin >> n >> k;
-    if(n > k){
-        if(n % 2 == k % 2){
-            cout << 0 << nl;
-        }else{
-            cout << 1 << nl;
+    vector<ll> arr(n);
+    for(int i=0; i<n; i++) cin >> arr[i];
+    sort(arr.begin(), arr.end());
+    ll ans = 0;
+    ll sum = 0;
+    ll cnt = 1;
+    for(int i=n-1; i>=0; i--){
+        sum += arr[i];
+        if(sum / cnt >= k){
+            ans = max(ans, cnt);
         }
-    }else{
-        cout << k - n << nl;
-    }
-    
+        cnt++;
+    }   
+    cout << ans << nl;
 }
 
 signed main(){
