@@ -11,20 +11,19 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    string s;
-    cin >> s;
-    ll ans = 1;
-    if(s[0] == '?') ans *= 9;
-    else if(s[0] == '0'){
-        cout << 0 << nl;
-        return;
-    }
-    for(int i = 1; i < s.size(); i++){
-        if(s[i] == '?'){
-            ans *= 10;
+    ll n, k;
+    cin >> n >> k;
+
+    if(n % 2 == 0){
+        if(n % 4 != 0){
+            ll y = (n - 1) / 2;
+            cout << y << " " << y << " " << 2 << nl;
+        }else{
+            cout << n/2 << " " << n/4 << " " << n/4 << nl;
         }
+    }else{
+        cout << n / 2 << " " << n / 2 << " " << 1 << nl;
     }
-    cout << ans << nl;
 }
 
 signed main(){

@@ -11,32 +11,20 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, d; 
-    cin >> n >> d;
-    string ans;
-    string s;
-    cin >> s;
+    ll n;
+    cin >> n;
+    string a, b, c;
+    cin >> a >> b >> c;
     bool flag = false;
-    if(d == 0){
-        s.pb(char(d + '0'));
-        cout << s << nl;
-        return;
-    }
+    ll cnt = 0;
     for(int i = 0; i < n; i++){
-        if(s[i] - '0' < d){
-            if(flag == false){
-                ans.pb(char(d + '0'));
-                ans.pb(s[i]);
-                flag = true;
-                continue;
-            }
+        if(a[i] != c[i] && b[i] != c[i]){
+            flag = true;
+            break;
         }
-        ans.pb(s[i]);
     }
-    if(flag == false){
-        ans.pb(char(d + '0'));
-    }
-    cout << ans << nl;
+    if(flag) YES;
+    else NO;
 }
 
 signed main(){

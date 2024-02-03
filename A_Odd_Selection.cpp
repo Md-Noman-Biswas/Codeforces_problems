@@ -11,20 +11,33 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    string s;
-    cin >> s;
-    ll ans = 1;
-    if(s[0] == '?') ans *= 9;
-    else if(s[0] == '0'){
-        cout << 0 << nl;
+    ll n, k;
+    cin >> n >> k;
+    vector<ll> arr(n);
+    ll totalSum = 0;
+    ll even = 0;
+    ll odd = 0;
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+        totalSum += arr[i];
+        if(arr[i] & 1) odd++;
+        else even++;
+    }   
+
+    if(odd == 0){
+        NO;
         return;
     }
-    for(int i = 1; i < s.size(); i++){
-        if(s[i] == '?'){
-            ans *= 10;
+
+    for(int i=1; i<=odd; i += 2){
+        if(i > k) break;
+        if(k - i <= even){
+            YES;
+            return;
         }
     }
-    cout << ans << nl;
+
+    NO;
 }
 
 signed main(){

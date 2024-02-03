@@ -11,31 +11,35 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, d; 
-    cin >> n >> d;
-    string ans;
     string s;
     cin >> s;
-    bool flag = false;
-    if(d == 0){
-        s.pb(char(d + '0'));
-        cout << s << nl;
+    ll consec = llmn;
+    ll cnt = 0;
+    ll zero = 0;
+    ll n = s.size();
+    ll v = n;
+    s += s;
+    n = s.size();
+    for(int i = 0; i < n; i++){
+        if(s[i] == '1'){
+            cnt++;
+        }else{
+            cnt = 0;
+            zero++;
+        }
+        consec = max(consec, cnt);
+    }   
+
+    if(zero == 0){
+        cout << v * v << nl;
         return;
     }
-    for(int i = 0; i < n; i++){
-        if(s[i] - '0' < d){
-            if(flag == false){
-                ans.pb(char(d + '0'));
-                ans.pb(s[i]);
-                flag = true;
-                continue;
-            }
-        }
-        ans.pb(s[i]);
+
+    ll ans = llmn;
+    for(int i = 0; i <= consec; i++){
+        ans = max(ans, (consec - i) * (i + 1));
     }
-    if(flag == false){
-        ans.pb(char(d + '0'));
-    }
+
     cout << ans << nl;
 }
 

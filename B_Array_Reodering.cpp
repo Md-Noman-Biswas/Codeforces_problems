@@ -11,30 +11,32 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, d; 
-    cin >> n >> d;
-    string ans;
-    string s;
-    cin >> s;
-    bool flag = false;
-    if(d == 0){
-        s.pb(char(d + '0'));
-        cout << s << nl;
-        return;
-    }
+    ll n;
+    cin >> n;
+    vector<ll> even;
+    vector<ll> odd;
     for(int i = 0; i < n; i++){
-        if(s[i] - '0' < d){
-            if(flag == false){
-                ans.pb(char(d + '0'));
-                ans.pb(s[i]);
-                flag = true;
-                continue;
-            }
+        ll x;
+        cin >> x;
+        if(x % 2 == 0){
+            even.pb(x);
+        }else{
+            odd.pb(x);
         }
-        ans.pb(s[i]);
+    }   
+
+    ll ans = 0;
+    ll points = n - 1;
+    for(int i = 0; i < even.size(); i++){
+        ans += points;
+        points--;
     }
-    if(flag == false){
-        ans.pb(char(d + '0'));
+
+    sort(odd.begin(), odd.end());
+    for(int i = 0; i < odd.size(); i++){
+        for(int j = i + 1; j < odd.size(); j++){
+            if(__gcd(odd[i], 2 * odd[j]) > 1) ans++;
+        }
     }
     cout << ans << nl;
 }

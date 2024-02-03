@@ -11,20 +11,24 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    string s;
-    cin >> s;
-    ll ans = 1;
-    if(s[0] == '?') ans *= 9;
-    else if(s[0] == '0'){
-        cout << 0 << nl;
-        return;
-    }
-    for(int i = 1; i < s.size(); i++){
-        if(s[i] == '?'){
-            ans *= 10;
+    ll n;
+    cin >> n;
+    string s1, s2;
+    cin >> s1 >> s2;
+    ll one_s1 = 0;
+    ll one_s2 = 0;
+    ll miss = 0;
+    
+    for(int i=0; i<n; i++){
+        if(s1[i] == s2[i]){
+            continue;
+        }else{
+            if(s1[i] == '1') one_s1++;
+            if(s2[i] == '1') one_s2++;
         }
     }
-    cout << ans << nl;
+    ll diff = min(one_s1, one_s2);
+    cout << diff + abs(one_s1 - one_s2) << nl;
 }
 
 signed main(){

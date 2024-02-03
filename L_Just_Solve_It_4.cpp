@@ -10,31 +10,26 @@ using namespace std;
 #define mod 1000000007
 const int N = 1e5 + 7;
 
+ll div_till_n(ll lcm, ll n){
+    return n/lcm;
+}
+
 void solve(){
-    string s;
-    cin >> s;
-    ll ans = 1;
-    if(s[0] == '?') ans *= 9;
-    else if(s[0] == '0'){
+    ll n, m, l, r;
+    cin >> n >> m >> l >> r;
+    ll temp = __gcd(n, m);
+    ll lcm = (n/temp) * m; 
+    if(n/temp > r/m){
         cout << 0 << nl;
         return;
     }
-    for(int i = 1; i < s.size(); i++){
-        if(s[i] == '?'){
-            ans *= 10;
-        }
-    }
-    cout << ans << nl;
+    cout << div_till_n(lcm, r) - div_till_n(lcm, l-1) << nl;
 }
 
 signed main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    int t;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
     return 0;
 }

@@ -9,22 +9,20 @@ using namespace std;
 #define llmn LONG_LONG_MIN
 #define mod 1000000007
 const int N = 1e5 + 7;
+ll n, a, b, c, d;
+
+ll yoo(ll x){
+    ll temp1 = x;
+    ll temp2 = n - (x - 1);
+    return(min(temp1, temp2));
+}
 
 void solve(){
-    string s;
-    cin >> s;
-    ll ans = 1;
-    if(s[0] == '?') ans *= 9;
-    else if(s[0] == '0'){
-        cout << 0 << nl;
-        return;
-    }
-    for(int i = 1; i < s.size(); i++){
-        if(s[i] == '?'){
-            ans *= 10;
-        }
-    }
-    cout << ans << nl;
+    cin >> n >> a >> b >> c >> d;
+    ll level1 = min(yoo(a), yoo(b));
+    ll level2 = min(yoo(c), yoo(d));
+
+    cout << abs(level1 - level2) << nl;
 }
 
 signed main(){

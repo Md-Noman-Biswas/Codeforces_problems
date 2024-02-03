@@ -11,32 +11,37 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, d; 
-    cin >> n >> d;
-    string ans;
     string s;
     cin >> s;
+    ll l = 0;
+    ll r = 0;
+    vector<ll> arr(4, 0);
     bool flag = false;
-    if(d == 0){
-        s.pb(char(d + '0'));
-        cout << s << nl;
-        return;
-    }
-    for(int i = 0; i < n; i++){
-        if(s[i] - '0' < d){
-            if(flag == false){
-                ans.pb(char(d + '0'));
-                ans.pb(s[i]);
+    ll n = s.size();
+    ll ans = llmx;
+    while(1){
+        if(r == n || l == n) break;
+        while(r < n){
+            arr[s[r] - '0']++;
+            r++;
+            if(arr[1] && arr[2] && arr[3]){
                 flag = true;
-                continue;
+                break;
             }
         }
-        ans.pb(s[i]);
+        while(arr[1] && arr[2] && arr[3]){
+            ans = min(ans, r - l);
+            arr[s[l] - '0']--;
+            l++;
+        }
     }
-    if(flag == false){
-        ans.pb(char(d + '0'));
+    
+    if(flag){
+        cout << ans << nl;
+    }else{
+        cout << 0 << nl;
     }
-    cout << ans << nl;
+
 }
 
 signed main(){

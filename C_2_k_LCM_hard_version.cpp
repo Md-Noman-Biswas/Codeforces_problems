@@ -10,39 +10,31 @@ using namespace std;
 #define mod 1000000007
 const int N = 1e5 + 7;
 
-bool cmp(pair<ll, ll> a, pair<ll, ll> b){
-    return a.first < b.first;
-}
-
 void solve(){
     ll n, k;
     cin >> n >> k;
-    vector<pair<ll, ll>> arr;
-
-    for(int i = 0; i < n; i++){
-        ll x;
-        cin >> x;
-        arr.push_back({x, i});
+    ll cnt = k - 3;
+    vector<ll> ans;
+    for(int i = 0; i < cnt; i++){
+        ans.pb(1);
     }
 
-    sort(arr.begin(), arr.end(), cmp);
-
-    vector<ll> brr(n);
-    for(int i = 0; i < n; i++){
-        cin >> brr[i];
-    }
-    sort(brr.begin(), brr.end());
-
-    vector<ll> ans(n);
-    for(int i = 0; i < n; i++){
-        ans[arr[i].second] = brr[i];
-    }
+    n -= cnt;
 
     for(auto it: ans){
         cout << it << " ";
     }
-    cout << nl;
 
+    if(n % 2 == 0){
+        if(n % 4 != 0){
+            ll y = (n - 1) / 2;
+            cout << y << " " << y << " " << 2 << nl;
+        }else{
+            cout << n/2 << " " << n/4 << " " << n/4 << nl;
+        }
+    }else{
+        cout << n / 2 << " " << n / 2 << " " << 1 << nl;
+    }
 }
 
 signed main(){

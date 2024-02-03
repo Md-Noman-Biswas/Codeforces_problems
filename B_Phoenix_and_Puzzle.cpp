@@ -10,21 +10,37 @@ using namespace std;
 #define mod 1000000007
 const int N = 1e5 + 7;
 
+bool isSquare(ll n){
+    ll temp = sqrt(n);
+    return temp * temp == n;
+}
+
+
 void solve(){
-    string s;
-    cin >> s;
-    ll ans = 1;
-    if(s[0] == '?') ans *= 9;
-    else if(s[0] == '0'){
-        cout << 0 << nl;
+    ll n;
+    cin >> n;
+    if(n == 1){
+        NO;
         return;
     }
-    for(int i = 1; i < s.size(); i++){
-        if(s[i] == '?'){
-            ans *= 10;
-        }
+    if(n % 2 != 0){
+        NO;
+        return;
     }
-    cout << ans << nl;
+    if(isSquare(n / 2)){
+        YES;
+        return;
+    }
+    if(n % 4 != 0){
+        NO;
+        return;
+    }
+    if(isSquare(n / 4)){
+        YES;
+        return;
+    }
+
+    NO;
 }
 
 signed main(){

@@ -10,21 +10,22 @@ using namespace std;
 #define mod 1000000007
 const int N = 1e5 + 7;
 
-void solve(){
-    string s;
-    cin >> s;
+ll binExpIter(ll a, ll b){
     ll ans = 1;
-    if(s[0] == '?') ans *= 9;
-    else if(s[0] == '0'){
-        cout << 0 << nl;
-        return;
-    }
-    for(int i = 1; i < s.size(); i++){
-        if(s[i] == '?'){
-            ans *= 10;
+    while(b){
+        if(b&1){
+            ans = (ans * 1LL * a) % mod;
         }
+        a = (a * 1LL *a) % mod;
+        b = b >> 1;
     }
-    cout << ans << nl;
+    return ans;
+}
+
+void solve(){
+    ll n, k;
+    cin >> n >> k;
+    cout << binExpIter(n, k) << nl;
 }
 
 signed main(){

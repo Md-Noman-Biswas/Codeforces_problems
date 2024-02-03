@@ -10,21 +10,27 @@ using namespace std;
 #define mod 1000000007
 const int N = 1e5 + 7;
 
+
 void solve(){
-    string s;
-    cin >> s;
-    ll ans = 1;
-    if(s[0] == '?') ans *= 9;
-    else if(s[0] == '0'){
-        cout << 0 << nl;
-        return;
-    }
-    for(int i = 1; i < s.size(); i++){
-        if(s[i] == '?'){
-            ans *= 10;
+    ll n;
+    cin >> n;
+    vector<pair<ll, ll>> v(n);
+    map<ll, ll> mp;
+    for(int i = 0; i < n; i++){
+        cin >> v[i].first;
+        v[i].second = i + 1;
+    }  
+
+    sort(v.begin(), v.end());
+
+    ll cnt = 0;
+    for(int i = 0; i < n - 1; i++){
+        for(int j = i + 1; j < n; j++){
+            if(v[i].first * v[j].first > 2 * n) break;
+            if(v[i].first * v[j].first == v[i].second + v[j].second) cnt++;
         }
     }
-    cout << ans << nl;
+    cout << cnt << nl;
 }
 
 signed main(){

@@ -11,20 +11,22 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    string s;
-    cin >> s;
-    ll ans = 1;
-    if(s[0] == '?') ans *= 9;
-    else if(s[0] == '0'){
-        cout << 0 << nl;
-        return;
-    }
-    for(int i = 1; i < s.size(); i++){
-        if(s[i] == '?'){
-            ans *= 10;
+    ll n;
+    cin >> n;
+    vector<ll> arr(n);
+    for(int i = 0; i < n; i++) cin >> arr[i];
+    sort(arr.begin(), arr.end());
+    ll cnt = 0;
+    ll group = 0;
+    for(int i = 0; i < n; i++){
+        cnt++;
+        if(arr[i] == cnt){
+            group++;
+            cnt = 0;
         }
-    }
-    cout << ans << nl;
+    }   
+
+    cout << group << nl;
 }
 
 signed main(){
