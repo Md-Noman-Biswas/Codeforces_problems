@@ -13,25 +13,31 @@ const int N = 1e5 + 7;
 void solve(){
     ll n, k;
     cin >> n >> k;
-    vector<ll> arr(n);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr.begin(), arr.end());
+    vector<ll> pos(n);
+    vector<ll> health(n);
+    for(int i = 0; i < n; i++) cin >> health[i];
+    for(int i = 0; i < n; i++) cin >> pos[i];
 
-    ll xd = llmn;
-    ll cons = 0;
-    for(int i = 1; i < n; i++){
-        //cout << arr[i] << " " << arr[i - 1] << nl;
-        if(arr[i] - arr[i - 1] <= k){
-            cons++;
-        }else{
-            xd = max(cons, xd);
-            cons = 0;
-        }
+    map<ll, ll> mp;
+
+    for(int i = 0; i < n; i++){
+        mp[abs(pos[i])] += health[i];
     }
-    xd = max(xd, cons);
-    ++xd;
-    //cout << xd << nl;
-    cout << n - xd << nl;
+
+    bool flag = true;
+    ll bullet = 0;
+    for(int i = 1; i <= n; i++){
+        bullet += k;
+        if(bullet < mp[i]){
+            flag = false;
+            break;
+        }
+        bullet -= mp[i];
+    }
+
+    if(flag) YES;
+    else NO;
+
 }
 
 /* Hey you should check this out

@@ -13,25 +13,31 @@ const int N = 1e5 + 7;
 void solve(){
     ll n, k;
     cin >> n >> k;
-    vector<ll> arr(n);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr.begin(), arr.end());
+    string s, t;
+    cin >> s >> t;
+    string ans;
+    for(int i = 0; i < n - 1; i++){
+        ans.push_back(s[i]);
+        if(s[i] == s[i + 1]){
+            for(int j = 0; j < k; j++){
+                ans.push_back(t[j]);
+            }
+        }
+    }   
+    ans.push_back(s.back());
+    //cout << ans << nl;
 
-    ll xd = llmn;
-    ll cons = 0;
-    for(int i = 1; i < n; i++){
-        //cout << arr[i] << " " << arr[i - 1] << nl;
-        if(arr[i] - arr[i - 1] <= k){
-            cons++;
-        }else{
-            xd = max(cons, xd);
-            cons = 0;
+    bool flag = true;
+
+    for(int i = 0; i < ans.size() - 1; i++){
+        if(ans[i] == ans[i + 1]){
+            flag = false;
+            break;
         }
     }
-    xd = max(xd, cons);
-    ++xd;
-    //cout << xd << nl;
-    cout << n - xd << nl;
+
+    if(flag) YES;
+    else NO;
 }
 
 /* Hey you should check this out

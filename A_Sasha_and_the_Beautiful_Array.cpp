@@ -5,6 +5,8 @@ using namespace std;
 #define YES cout << "YES\n"
 #define NO cout << "NO\n"
 #define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
 #define mod 1000000007
 const int N = 1e5 + 7;
 
@@ -12,24 +14,13 @@ void solve(){
     ll n;
     cin >> n;
     vector<ll> arr(n);
-    for(int i=0; i<n; i++) cin >> arr[i];
+    for(int i = 0; i < n; i++) cin >> arr[i];
+    sort(arr.begin(), arr.end());
     ll sum = 0;
-    ll odd = 0;
-
-    for(int i=0; i<n; i++){
-        sum += arr[i];
-        if(arr[i] % 2 != 0) odd++;
-        if(i == 0){
-            cout << arr[i] << " ";
-        }else{
-            if(odd % 3 == 1){
-                cout << sum - (odd + 2) / 3 << " ";
-            }else{
-                cout << sum - odd / 3 << " ";
-            }
-        }
-    }
-    cout << nl;
+    for(int i = 1; i < n; i++){
+        sum += arr[i] - arr[i - 1];
+    }   
+    cout << sum << nl;
 }
 
 signed main(){

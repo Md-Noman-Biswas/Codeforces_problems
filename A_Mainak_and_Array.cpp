@@ -11,27 +11,39 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, k;
-    cin >> n >> k;
+    ll n;
+    cin >> n;
     vector<ll> arr(n);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr.begin(), arr.end());
-
-    ll xd = llmn;
-    ll cons = 0;
-    for(int i = 1; i < n; i++){
-        //cout << arr[i] << " " << arr[i - 1] << nl;
-        if(arr[i] - arr[i - 1] <= k){
-            cons++;
-        }else{
-            xd = max(cons, xd);
-            cons = 0;
+    ll mn = llmx;
+    ll mx = llmn;
+    ll mx_ind = -1;
+    ll mn_ind = -1;
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+        if(arr[i] > mx){
+            mx = arr[i];
+            mx_ind = i;
         }
+        if(arr[i] < mn){
+            mn = arr[i];
+            mn_ind = i;
+        }
+    }   
+    // cout << mx_ind << " " << mn_ind << nl;
+    if(mn_ind == 0){
+        cout << mx - mn << nl;
+    }else{
+        ll before_max = arr[mx_ind - 1];
+        ll after_max = arr[mx_ind + 1];
+        ll before_min = arr[mn_ind - 1];
+        ll after_min = arr[mn_ind + 1];
+
+        ll xd1 = max(mx - before_max, mx - after_max);
+        ll xd2 = max(before_min - mn, after_min - mn);
+
+        cout << max(xd1, xd2) << nl;
     }
-    xd = max(xd, cons);
-    ++xd;
-    //cout << xd << nl;
-    cout << n - xd << nl;
+
 }
 
 /* Hey you should check this out

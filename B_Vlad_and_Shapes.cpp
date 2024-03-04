@@ -2,36 +2,49 @@
 using namespace std;
 #define ll long long
 #define nl "\n"
-#define YES cout << "YES\n"
-#define NO cout << "NO\n"
+#define YES cout << "SQUARE\n"
+#define NO cout << "TRIANGLE\n"
 #define pb push_back
 #define llmx LONG_LONG_MAX
 #define llmn LONG_LONG_MIN
 #define mod 1000000007
 const int N = 1e5 + 7;
 
-void solve(){
-    ll n, k;
-    cin >> n >> k;
-    vector<ll> arr(n);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr.begin(), arr.end());
+ll count_of_one(string v){
+    ll cnt = 0;
+    for(int i = 0; i < v.size(); i++){
+        if(v[i] == '1') cnt++;
+    }
+    return cnt;
+}
 
-    ll xd = llmn;
-    ll cons = 0;
-    for(int i = 1; i < n; i++){
-        //cout << arr[i] << " " << arr[i - 1] << nl;
-        if(arr[i] - arr[i - 1] <= k){
-            cons++;
-        }else{
-            xd = max(cons, xd);
-            cons = 0;
+void solve(){
+    ll n;
+    cin >> n;
+    vector<string> v[n];
+    for(int i = 0; i < n; i++){
+        string s;
+        cin >> s;
+        v[i].push_back(s);
+    }
+
+    set<ll> st;
+    for(int i = 0; i < n; i++){
+        string temp;
+        for(auto it: v[i]){
+            for(auto it2: it){
+                temp.push_back(it2);
+            }
+        }
+        ll xd = count_of_one(temp);
+        if(xd != 0){
+            st.insert(xd);
         }
     }
-    xd = max(xd, cons);
-    ++xd;
-    //cout << xd << nl;
-    cout << n - xd << nl;
+
+    if(st.size() == 1) YES;
+    else NO;
+
 }
 
 /* Hey you should check this out

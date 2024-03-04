@@ -10,28 +10,34 @@ using namespace std;
 #define mod 1000000007
 const int N = 1e5 + 7;
 
-void solve(){
-    ll n, k;
-    cin >> n >> k;
-    vector<ll> arr(n);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr.begin(), arr.end());
+ll next_multiple(ll n, ll k){
+    if(n % k == 0 || n % 10 == 0) n++;
+    ll temp = ceil(n / (k * 1.0)) * k;
+    return temp;
+}
 
-    ll xd = llmn;
-    ll cons = 0;
-    for(int i = 1; i < n; i++){
-        //cout << arr[i] << " " << arr[i - 1] << nl;
-        if(arr[i] - arr[i - 1] <= k){
-            cons++;
-        }else{
-            xd = max(cons, xd);
-            cons = 0;
-        }
+void solve(){
+    ll n;
+    cin >> n;
+    vector<ll> arr(n);   
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
     }
-    xd = max(xd, cons);
-    ++xd;
-    //cout << xd << nl;
-    cout << n - xd << nl;
+        if(n == 1){
+        cout << arr[0] << nl;
+        return;
+    }
+    ll ans = llmn;
+    ll last = arr[0];
+    for(int i = 1; i < n; i++){
+        ll temp = next_multiple(last, arr[i]);
+        //cout << temp << nl;
+        ans = max(ans, temp);
+        last = temp;
+    }
+    //cout << next_multiple(1000, 5) << nl;
+    cout << ans << nl;
+
 }
 
 /* Hey you should check this out

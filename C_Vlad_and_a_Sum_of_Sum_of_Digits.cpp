@@ -8,30 +8,30 @@ using namespace std;
 #define llmx LONG_LONG_MAX
 #define llmn LONG_LONG_MIN
 #define mod 1000000007
-const int N = 1e5 + 7;
+const int N = 2e5 + 7;
+
+vector<ll> pref(N, 0);
+
+ll digit_sum(ll n){
+    ll temp = 0;
+    while(n){
+        temp += (n % 10);
+        n /= 10;
+    }
+    return temp;
+}
+
+void init(){
+    for(int i = 1; i < N; i++){
+        ll temp = digit_sum(i);
+        pref[i] = temp + pref[i - 1];
+    }
+}
 
 void solve(){
-    ll n, k;
-    cin >> n >> k;
-    vector<ll> arr(n);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr.begin(), arr.end());
-
-    ll xd = llmn;
-    ll cons = 0;
-    for(int i = 1; i < n; i++){
-        //cout << arr[i] << " " << arr[i - 1] << nl;
-        if(arr[i] - arr[i - 1] <= k){
-            cons++;
-        }else{
-            xd = max(cons, xd);
-            cons = 0;
-        }
-    }
-    xd = max(xd, cons);
-    ++xd;
-    //cout << xd << nl;
-    cout << n - xd << nl;
+    ll n;
+    cin >> n;   
+    cout << pref[n] << nl;
 }
 
 /* Hey you should check this out
@@ -51,6 +51,7 @@ signed main(){
     cout.tie(0);
     int t;
     cin >> t;
+    init();
     while(t--) {
         solve();
     }

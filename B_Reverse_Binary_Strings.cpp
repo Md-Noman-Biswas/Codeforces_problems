@@ -11,21 +11,23 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll x, y, k, x1, y1;
-    cin >> x >> y >> k;
-    cin >> x1 >> y1;
-    bool flag = true;
-    while(k--){
-        ll t1, t2;
-        cin >> t1 >> t2;
-        if(((x1 + y1) & 1) == ((t1 + t2) & 1)){
-            flag = false;
+    ll n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    ll consec_one = 0;
+    ll consec_zero = 0;
+
+    for(int i = 0; i < s.size() - 1; i++){
+        if(s[i] == '1' && s[i + 1] == '1'){
+            consec_one++;
+        }
+        if(s[i] == '0' && s[i + 1] == '0'){
+            consec_zero++;
         }
     }
-
-    if(flag) YES;
-    else NO;
-
+    cout << max(consec_one, consec_zero) << nl;   
 }
 
 signed main(){

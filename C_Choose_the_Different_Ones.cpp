@@ -11,20 +11,38 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll x, y, k, x1, y1;
-    cin >> x >> y >> k;
-    cin >> x1 >> y1;
+    ll n, m, k;
+    cin >> n >> m >> k;
+    set<ll> st1;
+    set<ll> st2;
+    for(int i = 0; i < n; i++){
+        ll x;
+        cin >> x;
+        if(x <= k) st1.insert(x);
+    }
+
+    for(int i = 0; i < m; i++){
+        ll y;
+        cin >> y;
+        if(y <= k) st2.insert(y);
+    }
+
+    if(st1.size() < k / 2 ||  st2.size() < k / 2){
+        NO;
+        return;
+    }
+
     bool flag = true;
-    while(k--){
-        ll t1, t2;
-        cin >> t1 >> t2;
-        if(((x1 + y1) & 1) == ((t1 + t2) & 1)){
+    for(int i = 1; i <= k; i++){
+        if(st1.find(i) == st1.end() && st2.find(i) == st2.end()){
             flag = false;
+            break;
         }
     }
 
     if(flag) YES;
     else NO;
+
 
 }
 

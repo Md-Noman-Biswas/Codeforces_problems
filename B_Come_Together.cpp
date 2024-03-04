@@ -10,22 +10,22 @@ using namespace std;
 #define mod 1000000007
 const int N = 1e5 + 7;
 
-void solve(){
-    ll x, y, k, x1, y1;
-    cin >> x >> y >> k;
-    cin >> x1 >> y1;
-    bool flag = true;
-    while(k--){
-        ll t1, t2;
-        cin >> t1 >> t2;
-        if(((x1 + y1) & 1) == ((t1 + t2) & 1)){
-            flag = false;
-        }
+ll overlap(ll xa, ll xb, ll xc){
+    if(xa >= xc && xa >= xb){
+        return min(xa - xc, xa - xb);
     }
+    if(xa <= xc && xa <= xb){
+        return min(xc - xa, xb - xa);
+    }
+    return 0;
+}
 
-    if(flag) YES;
-    else NO;
-
+void solve(){
+    ll a1, a2, b1, b2, c1, c2;
+    cin >> a1 >> a2 >> b1 >> b2 >> c1 >> c2;
+    ll ans = 1;
+    ans += overlap(a1, b1, c1) + overlap(a2, b2, c2);
+    cout << ans << nl;
 }
 
 signed main(){

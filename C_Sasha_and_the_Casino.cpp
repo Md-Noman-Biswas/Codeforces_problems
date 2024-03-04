@@ -11,27 +11,27 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, k;
-    cin >> n >> k;
-    vector<ll> arr(n);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr.begin(), arr.end());
-
-    ll xd = llmn;
-    ll cons = 0;
-    for(int i = 1; i < n; i++){
-        //cout << arr[i] << " " << arr[i - 1] << nl;
-        if(arr[i] - arr[i - 1] <= k){
-            cons++;
-        }else{
-            xd = max(cons, xd);
-            cons = 0;
+    ll k, x, a;
+    cin >> k >> x >> a;
+    ll current = 1;
+    x--;//because already bet 1 coin
+    while(x--){
+        ll next_bet = current / (k - 1);
+        next_bet++;
+        current += next_bet;
+        if(current > a){
+            NO;
+            return;
         }
     }
-    xd = max(xd, cons);
-    ++xd;
-    //cout << xd << nl;
-    cout << n - xd << nl;
+    //cout << current << nl;
+    ll left_till_now = a - current;
+    //cout << left_till_now << nl;
+    if(left_till_now * k <= a){
+        NO;
+    }else{
+        YES;
+    }
 }
 
 /* Hey you should check this out

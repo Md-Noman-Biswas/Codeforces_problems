@@ -11,27 +11,41 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, k;
-    cin >> n >> k;
-    vector<ll> arr(n);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr.begin(), arr.end());
+    ll n;
+    cin >> n;
+    vector<pair<ll, ll>> pr;
 
-    ll xd = llmn;
-    ll cons = 0;
+    for(ll i = 0; i < n; i++){
+        ll x;
+        cin >> x;
+        pr.push_back({x, i});
+    }
+
+    sort(pr.begin(), pr.end());
+    
+    vector<ll> pref(n, 0);
+    pref[0] = pr[0].first;
     for(int i = 1; i < n; i++){
-        //cout << arr[i] << " " << arr[i - 1] << nl;
-        if(arr[i] - arr[i - 1] <= k){
-            cons++;
-        }else{
-            xd = max(cons, xd);
-            cons = 0;
+        pref[i] = pref[i - 1] + pr[i].first;
+    }
+    
+    vector<ll> ans(n);
+    stack<ll> st;
+    for(int i = 0; i < n; i++){
+        st.push(pr[i].second);
+        if(i == n - 1 || pref[i] < pr[i + 1].first){
+            while(!st.empty()){
+                ll temp = st.top();
+                ans[temp] = i;
+                st.pop();
+            }
         }
     }
-    xd = max(xd, cons);
-    ++xd;
-    //cout << xd << nl;
-    cout << n - xd << nl;
+
+    for(auto it: ans){
+        cout << it << " ";
+    }
+    cout << nl;
 }
 
 /* Hey you should check this out

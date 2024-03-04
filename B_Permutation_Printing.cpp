@@ -5,29 +5,30 @@ using namespace std;
 #define YES cout << "YES\n"
 #define NO cout << "NO\n"
 #define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
 #define mod 1000000007
 const int N = 1e5 + 7;
 
 void solve(){
     ll n;
     cin >> n;
-    vector<ll> arr(n);
-    for(int i=0; i<n; i++) cin >> arr[i];
-    ll sum = 0;
-    ll odd = 0;
 
-    for(int i=0; i<n; i++){
-        sum += arr[i];
-        if(arr[i] % 2 != 0) odd++;
-        if(i == 0){
-            cout << arr[i] << " ";
+    vector<ll> ans;
+    ll x = 1;
+    ll d = n;
+    for(int i = 0; i < n; i++){
+        if(i % 2 == 0){
+            ans.push_back(x);
+            x++;
         }else{
-            if(odd % 3 == 1){
-                cout << sum - (odd + 2) / 3 << " ";
-            }else{
-                cout << sum - odd / 3 << " ";
-            }
+            ans.push_back(d);
+            d--;
         }
+    }
+
+    for(auto it: ans){
+        cout << it << " ";
     }
     cout << nl;
 }

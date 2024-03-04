@@ -13,25 +13,14 @@ const int N = 1e5 + 7;
 void solve(){
     ll n, k;
     cin >> n >> k;
-    vector<ll> arr(n);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr.begin(), arr.end());
-
-    ll xd = llmn;
-    ll cons = 0;
-    for(int i = 1; i < n; i++){
-        //cout << arr[i] << " " << arr[i - 1] << nl;
-        if(arr[i] - arr[i - 1] <= k){
-            cons++;
-        }else{
-            xd = max(cons, xd);
-            cons = 0;
-        }
+    if(k == 4 * n - 2){
+        cout << 2 * n << nl;
+    }   
+    else if(k % 2 == 0){
+        cout << k / 2 << nl;
+    }else{
+        cout << (k + 1) / 2 << nl;
     }
-    xd = max(xd, cons);
-    ++xd;
-    //cout << xd << nl;
-    cout << n - xd << nl;
 }
 
 /* Hey you should check this out

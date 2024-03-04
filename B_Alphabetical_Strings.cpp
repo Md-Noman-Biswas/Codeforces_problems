@@ -11,21 +11,42 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll x, y, k, x1, y1;
-    cin >> x >> y >> k;
-    cin >> x1 >> y1;
+    string s;
+    cin >> s;
+    ll ind = -1;
+    for(int i = 0; i < s.size(); i++){
+        if(s[i] == 'a'){
+            ind = i;
+            break;
+        }
+    }   
+    if(ind == -1){
+        NO;
+        return;
+    }
+    
+    ll l = ind;
+    ll r = ind;
+    char ch = 'b';
     bool flag = true;
-    while(k--){
-        ll t1, t2;
-        cin >> t1 >> t2;
-        if(((x1 + y1) & 1) == ((t1 + t2) & 1)){
+
+    while(l > 0 || r < s.size() - 1){
+        if(s[l - 1] == ch){
+            l--;
+            ch++;
+        }
+        else if(s[r + 1] == ch){
+            r++;
+            ch++;
+        }
+        else{
             flag = false;
+            break;
         }
     }
 
     if(flag) YES;
     else NO;
-
 }
 
 signed main(){

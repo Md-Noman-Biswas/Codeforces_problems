@@ -11,22 +11,12 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll x, y, k, x1, y1;
-    cin >> x >> y >> k;
-    cin >> x1 >> y1;
-    bool flag = true;
-    while(k--){
-        ll t1, t2;
-        cin >> t1 >> t2;
-        if(((x1 + y1) & 1) == ((t1 + t2) & 1)){
-            flag = false;
-        }
-    }
+    ll n, k;
+    cin >> n >> k;
+    vector<ll> arr(n);
+    for(int i = 0; i < n; i++) cin >> arr[i];
 
-    if(flag) YES;
-    else NO;
-
-}
+}   
 
 signed main(){
     ios_base::sync_with_stdio(false);

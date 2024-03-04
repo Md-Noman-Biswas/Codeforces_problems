@@ -11,21 +11,25 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll x, y, k, x1, y1;
-    cin >> x >> y >> k;
-    cin >> x1 >> y1;
-    bool flag = true;
-    while(k--){
-        ll t1, t2;
-        cin >> t1 >> t2;
-        if(((x1 + y1) & 1) == ((t1 + t2) & 1)){
-            flag = false;
-        }
+    ll n;
+    cin >> n;
+    map<ll, ll> mp;
+    ll sz = n * (n - 1) / 2;
+    vector<ll> arr(sz);
+
+    for(int i = 0; i < sz; i++){
+        cin >> arr[i];
+    }   
+    sort(arr.begin(), arr.end());
+    ll ind = 0;
+    ll leap = n - 1;
+    
+    for(int ind = 0; ind < sz; ){
+        cout << arr[ind] << " ";
+        ind += leap;
+        leap--;
     }
-
-    if(flag) YES;
-    else NO;
-
+    cout << arr.back() << nl;
 }
 
 signed main(){

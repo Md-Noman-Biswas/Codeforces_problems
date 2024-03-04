@@ -11,27 +11,23 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n, k;
-    cin >> n >> k;
-    vector<ll> arr(n);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr.begin(), arr.end());
-
-    ll xd = llmn;
-    ll cons = 0;
-    for(int i = 1; i < n; i++){
-        //cout << arr[i] << " " << arr[i - 1] << nl;
-        if(arr[i] - arr[i - 1] <= k){
-            cons++;
-        }else{
-            xd = max(cons, xd);
-            cons = 0;
-        }
+    ll n, x;
+    cin >> n >> x;
+    vector<ll> v;
+    v.push_back(0);
+    for(int i = 1; i <= n; i++){
+        ll x;
+        cin >> x;
+        v.push_back(x);
     }
-    xd = max(xd, cons);
-    ++xd;
-    //cout << xd << nl;
-    cout << n - xd << nl;
+    ll ans = llmn;
+    for(int i = 0; i < v.size() - 1; i++){
+        ll diff = v[i + 1] - v[i];
+        ans = max(diff, ans);
+    }
+    ll xd = (abs(v.back() - x)) * 2;
+    ans = max(xd, ans);
+    cout << ans << nl;
 }
 
 /* Hey you should check this out

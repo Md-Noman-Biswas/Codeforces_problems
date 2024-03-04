@@ -11,34 +11,33 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll n;
-    cin >> n;
-    vector<ll> arr(n);
-    ll sum = 0;
+    ll n, m;
+    cin >> n >> m;
+    vector<string> v;
+
+    n = 2 * n - 1;
     for(int i = 0; i < n; i++){
-        cin >> arr[i];
-        sum += abs(arr[i]);
-    }   
-    ll ope = 0;
-    ll last = llmx;
-    bool neg = false;
-    bool pos = false;
-    for(int i = 0; i < n; i++){
-        if(arr[i] < 0){
-            neg = true;
+        string s;
+        cin >> s;
+        v.push_back(s);
+    }
+
+    string ans;
+    for(int i = 0; i < m; i++){
+        map<char, ll> mp;
+        for(int j = 0; j < v.size(); j++){
+            mp[v[j][i]]++;
         }
-        if(neg){
-            if(arr[i] <= 0){
-                continue;
-            }else{
-                ope++;
-                neg = false;
+
+        for(auto it: mp){
+            if(it.second % 2 != 0){
+                ans += it.first;
             }
         }
+
     }
-    if(neg) ope++;
-    cout << sum << " ";
-    cout << ope << nl;
+
+    cout << ans << nl;
 }
 
 signed main(){

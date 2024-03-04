@@ -14,31 +14,28 @@ void solve(){
     ll n;
     cin >> n;
     vector<ll> arr(n);
-    ll sum = 0;
-    for(int i = 0; i < n; i++){
-        cin >> arr[i];
-        sum += abs(arr[i]);
-    }   
-    ll ope = 0;
-    ll last = llmx;
-    bool neg = false;
-    bool pos = false;
-    for(int i = 0; i < n; i++){
-        if(arr[i] < 0){
-            neg = true;
-        }
-        if(neg){
-            if(arr[i] <= 0){
-                continue;
-            }else{
-                ope++;
-                neg = false;
-            }
-        }
+    for(int i = 0; i < n; i++) cin >> arr[i];
+    
+    vector<string> ans;
+    string temp;
+    for(int i = 0; i < 200; i++){
+        temp.push_back('a');
     }
-    if(neg) ope++;
-    cout << sum << " ";
-    cout << ope << nl;
+    ans.push_back(temp);
+    
+    for(int i = 0; i < n; i++){
+        string xd = ans.back();
+        ll index = arr[i];
+        if(xd[index] == 'a'){
+            xd[index] = 'b';
+        }else{
+            xd[index] = 'a';
+        }
+        ans.push_back(xd);
+    }
+    for(auto it: ans){
+        cout << it << nl;
+    }
 }
 
 signed main(){

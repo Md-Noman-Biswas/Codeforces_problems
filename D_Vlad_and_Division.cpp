@@ -10,28 +10,37 @@ using namespace std;
 #define mod 1000000007
 const int N = 1e5 + 7;
 
-void solve(){
-    ll n, k;
-    cin >> n >> k;
-    vector<ll> arr(n);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr.begin(), arr.end());
+void printBinary(int num){
+    for(int i=30; i>=0; i--){
+        cout << ((num >> i) & 1); //it takes ith bit to 0th position
+        //we can count bit in this way too using ct += (num>>i)&1
+    }
+    cout << "\n";
+}
 
-    ll xd = llmn;
-    ll cons = 0;
-    for(int i = 1; i < n; i++){
-        //cout << arr[i] << " " << arr[i - 1] << nl;
-        if(arr[i] - arr[i - 1] <= k){
-            cons++;
+void solve(){
+    ll n;
+    cin >> n;
+    vector<ll> arr(n);
+    multiset<ll> st;
+
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+
+    ll xd = (1 << 31) - 1;
+    ll ans = 0;
+    for(int i = 0; i < n; i++){
+        ll temp = arr[i] ^ xd;
+        if(st.find(temp) != st.end()){
+            ans++;
+            st.erase(st.find(temp));
         }else{
-            xd = max(cons, xd);
-            cons = 0;
+            st.insert(arr[i]);
         }
     }
-    xd = max(xd, cons);
-    ++xd;
-    //cout << xd << nl;
-    cout << n - xd << nl;
+
+    cout << ans + st.size() << nl;
 }
 
 /* Hey you should check this out

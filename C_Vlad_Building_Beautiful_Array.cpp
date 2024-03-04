@@ -32,6 +32,7 @@ void solve(){
     ll min_odd = 0;
     ll max_even = 0;
     ll max_odd = 0;
+    
     if(even.size() == 0 || odd.size() == 0){
         YES;
         return;

@@ -11,21 +11,19 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll x, y, k, x1, y1;
-    cin >> x >> y >> k;
-    cin >> x1 >> y1;
-    bool flag = true;
-    while(k--){
-        ll t1, t2;
-        cin >> t1 >> t2;
-        if(((x1 + y1) & 1) == ((t1 + t2) & 1)){
-            flag = false;
-        }
+    ll n, x, y; 
+    cin >> n >> x >> y;
+    vector<ll> arr(n);
+    for(ll i = 0; i < n; i++) cin >> arr[i];
+    map<pair<ll, ll>, ll> mp;
+    ll ans = 0;
+    for(int i = 0; i < n; i++){
+        ll a = (x - arr[i]%x)%x;
+        ll b = arr[i]%y;
+        ans += mp[{a, b}];
+        mp[{arr[i]%x, arr[i]%y}]++;
     }
-
-    if(flag) YES;
-    else NO;
-
+    cout << ans << endl;
 }
 
 signed main(){

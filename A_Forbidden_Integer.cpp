@@ -1,108 +1,53 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
+#define nl "\n"
+#define YES cout << "YES\n"
+#define NO cout << "NO\n"
+#define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
+#define mod 1000000007
+const int N = 1e5 + 7;
+
 void solve(){
-    int n;
-    cin >> n;
-    int k;
-    cin >> k;
-    int x; 
-    cin >> x;
-    int cnt = 0;
-    if(k == 1){
-        if(x == 1){
-            cout << "NO" << "\n";
-        }else{
-            cout << "YES" << "\n";
-            cout << n << "\n";
-            for(int i=0; i<n; i++){
-                if(i == n-1){
-                cout << 1 << "\n";
-                break;
-            }
-            cout << 1 << " ";
-            }
-        }
-    }else if(k == 2){
-        if(x == 1 && n%2 == 0){
-            cout << "YES" << "\n";
-            cout << n/2 << "\n";
-            for(int i=0; i<n/2; i++){
-                if(i == (n/2) - 1){
-                        cout << 2 << "\n";
-                        break;
-                    }
-                    cout << 2 << " ";
-            }
-        }else if(x == 1 && n%2 != 0){
-            cout << "NO" << "\n";
-        }else if(x == 2 && n%2 == 0){
-            cout << "YES" << "\n";
-            cout << n << "\n";
-            for(int i=0; i<n; i++){
-            if(i == n-1){
-                cout << 1 << "\n";
-                break;
-            }
-            cout << 1 << " ";
-            }
-        }else if(x == 2 && n%2 != 0){
-            cout << "YES" << "\n";
-            cout << n << "\n";
-            for(int i=0; i<n; i++){
-            if(i == n-1){
-                cout << 1 << "\n";
-                break;
-            }
+    ll n, k, x;
+    cin >> n >> k >> x;
+    if(x != 1){
+        YES;
+        cout << n << nl;
+        for(int i = 0; i < n; i++){
             cout << 1 << " ";
         }
-        }
-    }else if(x != 1){
-        cout << "YES" << "\n";
-        cout << n << "\n";
-        for(int i=0; i<n; i++){
-            if(i == n-1){
-                cout << 1 << "\n";
-                break;
-            }
-            cout << 1 << " ";
-        }
-    }else if(x == 1){
-            if(n%2 == 0){
-                cnt = n/2;
-                cout << "YES" << "\n";
-                cout << cnt << "\n";
-                for(int i=0; i<cnt; i++){
-                    if(i == cnt-1){
-                        cout << 2 << "\n";
-                        break;
-                    }
+        cout << nl;;
+    }
+    else if(x == 1){
+        if(k >= 2){
+            if(n % 2 == 0){
+                YES;
+                cout << n / 2 << nl;
+                for(int i = 0; i < n / 2; i++){
                     cout << 2 << " ";
                 }
-        }else{
-            cout << "YES" << "\n";
-            if(n%3 == 0){
-                cnt = n/3;
-                cout << cnt << "\n";
-                for(int i=0; i<cnt; i++){
-                    if(i == cnt-1){
-                        cout << 3 << "\n";
-                        break;
-                    }
-                    cout << 3 << " ";
-                }
+                cout << nl;
             }else{
-                int rem = n%3;
-                cnt = n/3 + 1;
-                cout << cnt << "\n";
-                for(int i=0; i<(n/3); i++){
-                    cout << 3 << " ";
+                if(k >= 3){
+                    YES;
+                    cout << (n - 3) / 2 + 1 << nl;
+                    for(int i = 0; i < (n - 3) / 2; i++){
+                        cout << 2 << " ";
+                    }
+                    cout << 3 << nl;
+                }else{
+                    NO;
                 }
-                cout << rem << "\n";
             }
+        }else{
+            NO;
         }
     }
 }
+
 signed main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);

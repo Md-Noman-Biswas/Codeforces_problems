@@ -10,24 +10,55 @@ using namespace std;
 #define mod 1000000007
 const int N = 1e5 + 7;
 
+ll next_multiple(ll x){
+    ll temp = ceil(x / (3 * 1.0)) * 3;
+    return temp;
+}
+
+ll prev_multiple(ll x){
+    ll temp = (x / 3) * 3;
+    return temp;
+}
+
 void solve(){
     ll n;
     cin >> n;
-    ll cnt = 0;
-    ll ans = llmn;
-    for(int i = 1; i < 200; i++){
-        if(n % i == 0){
-            cnt++;
-        }else{
-            ans = max(ans, cnt);
-            cnt = 0;
+    vector<ll> arr(n + 1);
+    ll sum = 0;
+    ll index = -1;
+    for(int i = 1; i <= n; i++){
+        cin >> arr[i];
+        sum += arr[i];
+        if(sum % 3 == 0){
+            //cout << sum << nl;
+            index = i;
         }
+    }   
+    //cout << sum << nl;
+    ll xd1 = next_multiple(sum);
+    //cout << xd1 << nl;
+
+    ll temp = sum;
+    bool flag = false;
+    for(int i = 1; i <= n; i++){
+        temp -= arr[i];
+        if(temp % 3 == 0){
+            flag = true;
+            break;
+        }
+        temp = sum;
     }
+
+    ll ans = min(n - index, xd1 - sum);
+
+    if(flag) ans = min(ans, 1*1LL);
+
     cout << ans << nl;
+
 }
 
-
-/* Hey you should check this out
+/* Hey yo
+u should check this out
     * int overflow, array bounds
     * reset global array and variable
     * look for special cases (n=1?)

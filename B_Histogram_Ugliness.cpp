@@ -13,16 +13,25 @@ const int N = 1e5 + 7;
 void solve(){
     ll n;
     cin >> n;
-    set<string> st;
-    string s;
-    cin >> s;
-    for(int i = 0; i < s.size() - 1; i++){
-        string temp;
-        temp.pb(s[i]);
-        temp.pb(s[i + 1]);
-        st.insert(temp);
+    vector<ll> arr(n + 2, 0);
+    for(int i = 1; i <= n; i++){
+        cin >> arr[i];
     }
-    cout << st.size() << nl;
+
+    ll ope = 0;
+    for(int i = 1; i <= n; i++){
+        if(arr[i] > arr[i - 1] && arr[i] > arr[i + 1]){
+            ll temp = max(arr[i + 1], arr[i - 1]);
+            ope += arr[i] - temp;
+            arr[i] = temp;
+        }
+    }
+
+    ll total = 0;
+    for(int i = 1; i <= n + 1; i++){
+        total += abs(arr[i] - arr[i - 1]);
+    }
+    cout << total + ope << nl;
 }
 
 signed main(){

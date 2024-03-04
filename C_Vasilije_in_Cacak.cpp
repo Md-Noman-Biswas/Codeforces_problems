@@ -2,31 +2,42 @@
 using namespace std;
 #define ll long long
 #define nl "\n"
+#define YES cout << "YES\n"
+#define NO cout << "NO\n"
+#define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
+#define mod 1000000007
+const int N = 1e5 + 7;
 
 void solve(){
     ll n, k, x;
     cin >> n >> k >> x;
-    ll temp = (n*(n+1))/2;
-    ll temp2 = (k*(k+1))/2;
-    if(x > temp || temp2 > x){
-        cout << "NO" << nl;
-    }else{
-        ll sum = 0;
-        ll cnt = 0;
-        for(int i=n; ; i--){
-            cnt++;
-            sum += i;
-            if(cnt == k){
-                break;
-            }
-        }
-        if(sum >= x){
-            cout << "YES" << nl;
+    ll sum = n * (n + 1) / 2;
+    if(sum < x) NO;
+    else{
+        ll xd = n - k;
+        ll last_digits_sum = sum - (xd * (xd + 1) / 2); 
+        // cout << xd << nl;
+        // cout << last_digits_sum << nl;
+        if((k * (k + 1) / 2) > x || last_digits_sum < x){
+            NO;
         }else{
-            cout << "NO" << nl;
+            YES;
         }
-    }
+    }   
 }
+
+/* Hey you should check this out
+    * int overflow, array bounds
+    * reset global array and variable
+    * look for special cases (n=1?)
+    * do something instead of nothing and stay organized
+    * bruteforce to find pattern
+    * DON'T GET STUCK ON ONE APPROACH
+    * Think the problem backwards
+    * In practice time don't see failing test case
+*/
 
 signed main(){
     ios_base::sync_with_stdio(false);

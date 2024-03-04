@@ -11,22 +11,19 @@ using namespace std;
 const int N = 1e5 + 7;
 
 void solve(){
-    ll x, y, k, x1, y1;
-    cin >> x >> y >> k;
-    cin >> x1 >> y1;
-    bool flag = true;
-    while(k--){
-        ll t1, t2;
-        cin >> t1 >> t2;
-        if(((x1 + y1) & 1) == ((t1 + t2) & 1)){
-            flag = false;
-        }
+    ll n;
+    cin >> n;
+    vector<ll> arr(2 * n);
+    for(int i = 0; i < 2 * n; i++) cin >> arr[i];
+
+    sort(arr.begin(), arr.end());
+    ll ans = 0;
+
+    for(int i = 2 * n - 1; i > 0; i -= 2){
+        ans += min(arr[i], arr[i - 1]);
     }
-
-    if(flag) YES;
-    else NO;
-
-}
+    cout << ans << nl;
+}       
 
 signed main(){
     ios_base::sync_with_stdio(false);

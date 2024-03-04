@@ -13,16 +13,29 @@ const int N = 1e5 + 7;
 void solve(){
     ll n;
     cin >> n;
-    set<string> st;
     string s;
     cin >> s;
-    for(int i = 0; i < s.size() - 1; i++){
-        string temp;
-        temp.pb(s[i]);
-        temp.pb(s[i + 1]);
-        st.insert(temp);
+    ll right = -1;
+    for(int i = s.size() - 1; i >= 0; i--){
+        if(s[i] == 'B'){
+            right = i;
+            break;
+        }
+    }   
+    ll left = -1;
+    for(int i = 0; i < s.size(); i++){
+        if(s[i] == 'A'){
+            left = i;
+            break;
+        }
+    }   
+    
+    //cout << right << " " << left << nl;
+    if(left > right || (left == -1 || right == -1)){
+        cout << 0 << nl;
+        return;
     }
-    cout << st.size() << nl;
+    cout << right - left << nl;
 }
 
 signed main(){
