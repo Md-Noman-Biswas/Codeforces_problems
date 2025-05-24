@@ -16,34 +16,36 @@ void solve(){
     vector<ll> arr(n);
     ll mn = llmx;
     ll mx = llmn;
-    ll mx_ind = -1;
-    ll mn_ind = -1;
+    ll mn_index = 0;
+    ll mx_index = 0;
     for(int i = 0; i < n; i++){
         cin >> arr[i];
-        if(arr[i] > mx){
-            mx = arr[i];
-            mx_ind = i;
-        }
-        if(arr[i] < mn){
-            mn = arr[i];
-            mn_ind = i;
-        }
-    }   
-    // cout << mx_ind << " " << mn_ind << nl;
-    if(mn_ind == 0){
-        cout << mx - mn << nl;
-    }else{
-        ll before_max = arr[mx_ind - 1];
-        ll after_max = arr[mx_ind + 1];
-        ll before_min = arr[mn_ind - 1];
-        ll after_min = arr[mn_ind + 1];
-
-        ll xd1 = max(mx - before_max, mx - after_max);
-        ll xd2 = max(before_min - mn, after_min - mn);
-
-        cout << max(xd1, xd2) << nl;
+    }
+    if(n == 1){
+        cout << 0 << nl;
+        return;
     }
 
+    ll v1 = llmn;
+    for(int i = 1; i < n; i++){
+        ll diff = arr[i] - arr[0];
+        v1 = max(diff, v1);
+    }
+
+    ll v2 = llmn;
+    for(int i = n - 2; i >= 0; i--){
+        ll diff = arr[n - 1] - arr[i];
+        v2 = max(diff, v2);
+    }
+
+    ll v3 = llmn;
+    for(int i = 0; i < n - 1; i++){
+        ll diff = arr[i] - arr[i + 1];
+        v3 = max(diff, v3);
+    }
+
+    ll temp1 = max(v1, v2);
+    cout << max(temp1, v3) << nl;
 }
 
 /* Hey you should check this out

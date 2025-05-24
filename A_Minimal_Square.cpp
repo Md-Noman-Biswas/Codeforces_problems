@@ -1,17 +1,49 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define ll long long
+#define nl "\n"
+#define YES cout << "YES\n"
+#define NO cout << "NO\n"
+#define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
+#define mod 1000000007
+const int N = 1e5 + 7;
+const int INF = 1e9 + 10;
+
 void solve(){
-    int a,b;
+    ll a, b;
     cin >> a >> b;
-    int swap1 = max(2*a,b);
-    int swap2 = max(a,2*b);
-    int final = min(swap1,swap2);
-    cout << final * final << "\n"; 
+    if (b > a) {
+        swap(a, b);
+    }   
+    if (2 * b >= a) {
+        cout << 2 * b * 2 * b << nl;
+    }
+    else {
+        cout << a * a << nl;
+    }
 }
-int main(){
+
+/* Hey you should check this out
+    * int overflow, array bounds
+    * reset global array and variable
+    * look for special cases (n=1?)
+    * do something instead of nothing and stay organized
+    * bruteforce to find pattern
+    * DON'T GET STUCK ON ONE APPROACH
+    * Think the problem backwards
+    * In practice time don't see failing test case
+*/
+
+signed main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     int t;
     cin >> t;
-    while(t--){
+    while(t--) {
         solve();
     }
+    return 0;
 }

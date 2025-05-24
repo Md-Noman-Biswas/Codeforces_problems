@@ -1,39 +1,54 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-bool cmp(pair<ll, ll> v1, pair<ll, ll> v2){
-    if(v1.first == v2.first) return v1.second < v2.second;
-    else return v1.first > v2.first; 
+#define nl "\n"
+#define YES cout << "YES\n"
+#define NO cout << "NO\n"
+#define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
+#define mod 1000000007
+const int N = 1e5 + 7;
+
+bool cmp(pair<ll, ll> p1, pair<ll, ll> p2){
+    if(p1.first == p2.first) return p1.second < p2.second;
+    return p1.first > p2.first;
 }
+
 void solve(){
-    ll n,k;
+    ll n, k;
     cin >> n >> k;
-    vector<ll> ans;
-    vector<pair<ll, ll>> v;
-    for(int i=0; i<n; i++){
-        int x;
+    vector<pair<ll, ll>> pr;
+    for(int i = 0; i < n; i++){
+        ll x;
         cin >> x;
-        if(x % k == 0){
-            ans.push_back(i+1);
-        }else{
-            x %= k;
-            v.push_back({x, i+1});
-        }
+        x %= k;
+        if(!x) x = k;
+        pr.push_back({x, i + 1});
     }
-    sort(v.begin(), v.end(), cmp);
-    for(auto it: v){
-        ans.push_back(it.second);
+    sort(pr.begin(), pr.end(), cmp);
+    for(auto it: pr){
+        cout << it.second << " ";
     }
-    for(auto it: ans){
-        cout << it << " ";
-    }
-    cout << "\n";
+    cout << nl;
 }
+
+/* Hey you should check this out
+    * int overflow, array bounds
+    * reset global array and variable
+    * look for special cases (n=1?)
+    * do something instead of nothing and stay organized
+    * bruteforce to find pattern
+    * DON'T GET STUCK ON ONE APPROACH
+    * Think the problem backwards
+    * In practice time don't see failing test case
+*/
+
 signed main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    ll t;
+    int t;
     cin >> t;
     while(t--) {
         solve();

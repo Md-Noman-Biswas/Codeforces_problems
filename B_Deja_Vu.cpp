@@ -9,33 +9,33 @@ using namespace std;
 #define llmn LONG_LONG_MIN
 #define mod 1000000007
 const int N = 1e5 + 7;
+const int INF = 1e9 + 10;
 
 void solve(){
-    ll n, q;
-    cin >> n >> q;
+    ll n, k;
+    cin >> n >> k;
     vector<ll> arr(n);
-    vector<ll> query;
+    vector<ll> hsh(31, 0);
+    vector<ll> q;
     for(int i = 0; i < n; i++) cin >> arr[i];
-    ll mn = llmx;
-    for(int i = 0; i < q; i++){
+    for(int i = 0; i < k; i++){
         ll x;
         cin >> x;
-        if(x < mn){
-            query.push_back(x);
+        if(hsh[x] != 1){
+            q.push_back(x);
+            hsh[x] = 1;
         }
-        mn = min(x, mn);
-    }
-
-    for(auto it: query){
+    }   
+    
+    for(auto it: q){
         for(int i = 0; i < n; i++){
             if(arr[i] % (1 << it) == 0){
                 ll temp = it;
-                --temp;
+                temp--;
                 arr[i] += (1 << temp);
             }
         }
     }
-
     for(auto it: arr){
         cout << it << " ";
     }

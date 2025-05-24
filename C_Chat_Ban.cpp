@@ -2,56 +2,79 @@
 using namespace std;
 #define ll long long
 #define nl "\n"
+#define YES cout << "YES\n"
+#define NO cout << "NO\n"
+#define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
+#define mod 1000000007
+const int N = 1e5 + 7;
+const int INF = 1e9 + 10;
 
-ll k, x;
-
-bool predicate(ll mid){
-<<<<<<< HEAD
-    ll emotes = mid * mid - (mid * (mid - 1)/2);
-    return emotes <= x;
-=======
-    ll total_emotes = k*k;
-    ll emotes = 0;
-    if(mid <= k){
-        emotes = mid * (mid + 1)/2;
+bool predicate(ll x, ll k, ll mx){
+    ll messages = 0;
+    if(x <= k){
+        messages += x * (x + 1) / 2;
     }else{
-        ll temp = mid - k;
-        ll lower_part = k - temp - 1;
-        emotes = total_emotes - (lower_part * (lower_part + 1)/2);
+        messages += k * (k + 1) / 2;
+        ll temp = k - 1;
+        ll sum = temp * (temp + 1) / 2;
+        ll rem = x - k;
+        ll temp2 = temp - rem;
+        sum -= (temp2 * (temp2 + 1) / 2);
+        messages += sum;
     }
-    return emotes < x;
->>>>>>> 5b033576266dbccfc5656c3126a4e00433a98ee9
+    return messages < mx;
 }
 
+
 void solve(){
-    cin >> k >> x;
+    ll k, mx;
+    cin >> k >> mx;   
     ll l = 0;
-<<<<<<< HEAD
-    ll r = k * k;
-    ll ans = 0;
-=======
     ll r = 2 * k - 1;
     ll ans = 0;
-    if(k * k <= x){
+    ll total = (k * (k + 1) / 2);
+    ll temp = k - 1;
+    total += temp * (temp + 1) / 2;
+    if(total <= mx){
         cout << 2 * k - 1 << nl;
         return;
     }
->>>>>>> 5b033576266dbccfc5656c3126a4e00433a98ee9
     while(l <= r){
         ll mid = l + (r - l) / 2;
-        if(predicate(mid)){
+        if(predicate(mid, k, mx)){
             ans = mid;
             l = mid + 1;
         }else{
             r = mid - 1;
         }
     }
-<<<<<<< HEAD
-    cout << ans << nl;
-=======
+    ll messages = 0;
+    if(ans <= k){
+        messages += ans * (ans + 1) / 2;
+    }else{
+        messages += k * (k + 1) / 2;
+        ll temp = k - 1;
+        ll sum = temp * (temp + 1) / 2;
+        ll rem = ans - k;
+        ll temp2 = temp - rem;
+        sum -= (temp2 * (temp2 + 1) / 2);
+        messages += sum;
+    }
     cout << ++ans << nl;
->>>>>>> 5b033576266dbccfc5656c3126a4e00433a98ee9
 }
+
+/* Hey you should check this out
+    * int overflow, array bounds
+    * reset global array and variable
+    * look for special cases (n=1?)
+    * do something instead of nothing and stay organized
+    * bruteforce to find pattern
+    * DON'T GET STUCK ON ONE APPROACH
+    * Think the problem backwards
+    * In practice time don't see failing test case
+*/
 
 signed main(){
     ios_base::sync_with_stdio(false);

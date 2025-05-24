@@ -2,19 +2,24 @@
 using namespace std;
 #define ll long long
 #define nl "\n"
+#define YES cout << "YES\n"
+#define NO cout << "NO\n"
+#define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
+#define mod 1000000007
+const int N = 1e5 + 7;
 
 void solve(){
     ll n;
     cin >> n;
     vector<ll> arr(n);
     vector<ll> brr(n);
+    for(int i = 0; i < n; i++) cin >> arr[i];
+    for(int i = 0; i < n; i++) cin >> brr[i];
 
-    for(int i=0; i<n; i++) cin >> arr[i];
-    for(int i=0; i<n; i++) cin >> brr[i];
-
-    map<int, int> consA, consB;
-
-    int cons = 0;
+    ll cons = 0;
+    map<ll, ll> consA, consB;
     for(int i=0; i<n; i++){
         cons++;
         if(i == n-1 || arr[i+1] != arr[i]){
@@ -25,7 +30,7 @@ void solve(){
             }
             cons = 0;
         }
-    }
+    }   
 
     cons = 0;
     for(int i=0; i<n; i++){
@@ -38,17 +43,33 @@ void solve(){
             }
             cons = 0;
         }
+    }  
+
+    ll ans = llmn;
+
+    for(int i = 0; i < n; i++){
+        ll temp = consA[arr[i]] + consB[arr[i]];
+        ans = max(temp, ans);
     }
 
-    int ans = 0;
-    for(auto it:consA){
-        ans=max(ans,(consA[it.first]+consB[it.first]));
-      }
-      for(auto it:consB){
-        ans=max(ans,(consA[it.first]+consB[it.first]));
-      }
+    for(int i = 0; i < n; i++){
+        ll temp = consA[brr[i]] + consB[brr[i]];
+        ans = max(temp, ans);
+    }
+
     cout << ans << nl;
 }
+
+/* Hey you should check this out
+    * int overflow, array bounds
+    * reset global array and variable
+    * look for special cases (n=1?)
+    * do something instead of nothing and stay organized
+    * bruteforce to find pattern
+    * DON'T GET STUCK ON ONE APPROACH
+    * Think the problem backwards
+    * In practice time don't see failing test case
+*/
 
 signed main(){
     ios_base::sync_with_stdio(false);

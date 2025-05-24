@@ -9,36 +9,48 @@ using namespace std;
 #define llmn LONG_LONG_MIN
 #define mod 1000000007
 const int N = 1e5 + 7;
+const int INF = 1e9 + 10;
 
 void solve(){
     ll n;
     cin >> n;
     vector<ll> arr(n + 1);
-    for(int i = 1; i <= n; i++) cin >> arr[i];
-    ll q;
-    cin >> q;
-    vector<ll> change(n + 1, -1);
-    for(int i = n - 1; i >= 1; i--){
+    for(int i = 1; i <= n; i++){
+        cin >> arr[i];
+    }
+    map<ll, ll> mp;
+    mp[n] = -1;
+    for(int i = n - 1; i > 0; i--){
         if(arr[i] != arr[i + 1]){
-            change[i] = i + 1; 
-        }
-        else{
-            change[i] = change[i + 1];
+            mp[i] = i + 1;
+        }else{
+            mp[i] = mp[i + 1];
         }
     }
-
+    int q;
+    cin >> q;
     while(q--){
         ll l, r;
         cin >> l >> r;
-        ll ind1 = -1;
-        ll ind2 = -1;
-        if(change[l] != -1 && change[l] <= r){
-            ind1 = l;
-            ind2 = change[l];
+        if(mp[l] <= r && mp[l] != -1){
+            cout << l << " " << mp[l] << nl;
+        }else{
+            cout << -1 << " " << -1 << nl;
         }
-        cout << ind1 << " " << ind2 << nl;
     }
+    cout << nl;
 }
+
+/* Hey you should check this out
+    * int overflow, array bounds
+    * reset global array and variable
+    * look for special cases (n=1?)
+    * do something instead of nothing and stay organized
+    * bruteforce to find pattern
+    * DON'T GET STUCK ON ONE APPROACH
+    * Think the problem backwards
+    * In practice time don't see failing test case
+*/
 
 signed main(){
     ios_base::sync_with_stdio(false);
@@ -48,7 +60,6 @@ signed main(){
     cin >> t;
     while(t--) {
         solve();
-        cout << nl;
     }
     return 0;
 }

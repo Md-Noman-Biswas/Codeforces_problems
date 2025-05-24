@@ -1,13 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-ll fact(ll n){
-    ll ans = 1;
-    for(ll i=1; i<=n; i++){
-        ans *= i; 
-    }
-    return ans;
-}
+
 void solve(){
     ll n;
     cin >> n;

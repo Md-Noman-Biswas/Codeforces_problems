@@ -9,94 +9,51 @@ using namespace std;
 #define llmn LONG_LONG_MIN
 #define mod 1000000007
 const int N = 1e5 + 7;
+const int INF = 1e9 + 10;
 
 void solve(){
     ll n;
     cin >> n;
     vector<ll> arr(n);
-    vector<ll> sub1;
-    vector<ll> sub2;
-    ll prev1 = 0;
-    ll prev2 = 0;
-
-    for(int i=0; i<n; i++){
-        cin >> arr[i];
-    }
-    if(n == 1 || n == 2){
-        cout << 0 << nl;
-        return;
-    }
-
-    sub1.pb(arr[0]);
-    prev1 = arr[0];
-    ll index = 0;
-    for(int i=1; i<n; i++){
-        index = i;
-        if(arr[i] <= prev1){
-            sub1.pb(arr[i]);
-            prev1 = arr[i];
-        }else{
-            sub2.pb(arr[i]);
-            prev2 = arr[i];
-            break;
-        }
-    }
-    if(index == n-1){
-        cout << 0 << nl;
-        return;
-    }
-
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    
+    ll last1 = llmx;
+    ll last2 = llmx;
     ll cnt = 0;
 
-    for(int i=index + 1; i<n; i++){
-        if((prev1 >= arr[i]) && (prev2 >= arr[i]) && (prev1 <= prev2)){
-            sub1.pb(arr[i]);
-            prev1 = arr[i];
+    for (int i = 0; i < n; i++) {
+        if (last1 <= last2) {
+            if (arr[i] <= last1) last1 = arr[i];
+            else if (arr[i] <= last2) last2 = arr[i];
+            else {
+                last1 = arr[i];
+                cnt++;
+            }
         }
-        else if((prev1 >= arr[i]) && (prev2 >= arr[i]) && (prev1 > prev2)){
-            sub2.pb(arr[i]);
-            prev2 = arr[i];
-        }
-        else if((prev1 >= arr[i]) && (prev2 < arr[i])){
-            sub1.pb(arr[i]);
-            prev1 = arr[i];
-        }
-        else if((prev2 >= arr[i]) && (prev1 < arr[i])){
-            sub2.pb(arr[i]);
-            prev2 = arr[i];
-        }
-        else if((prev1 < arr[i]) && (prev2 < arr[i])){
-            if(prev1 > prev2){
-                sub2.pb(arr[i]);
-                prev2 = arr[i];
-            }else{
-                sub1.pb(arr[i]);
-                prev1 = arr[i];
+        else {
+            if (arr[i] <= last2) last2 = arr[i];
+            else if (arr[i] <= last1) last1 = arr[i];
+            else {
+                last2 = arr[i];
+                cnt++;
             }
         }
     }
 
-    // for(auto it: sub1){
-    //     cout << it << " ";
-    // }
-    // cout << nl;
-    // for(auto it: sub2){
-    //     cout << it << " ";
-    // }
-    // cout << nl;
 
-    for(int i=0; i<sub1.size() - 1; i++){
-        if(sub1[i] < sub1[i+1]){
-            cnt++;
-        }
-    }
-    for(int i=0; i<sub2.size() - 1; i++){
-        if(sub2[i] < sub2[i+1]){
-            cnt++;
-        }
-    }
     cout << cnt << nl;
 }
+
+/* Hey you should check this out
+    * int overflow, array bounds
+    * reset global array and variable
+    * look for special cases (n=1?)
+    * do something instead of nothing and stay organized
+    * bruteforce to find pattern
+    * DON'T GET STUCK ON ONE APPROACH
+    * Think the problem backwards
+    * In practice time don't see failing test case
+*/
 
 signed main(){
     ios_base::sync_with_stdio(false);

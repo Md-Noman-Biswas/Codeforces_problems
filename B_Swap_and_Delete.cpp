@@ -5,37 +5,53 @@ using namespace std;
 #define YES cout << "YES\n"
 #define NO cout << "NO\n"
 #define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
 #define mod 1000000007
 const int N = 1e5 + 7;
 
 void solve(){
     string s;
     cin >> s;
-    int one = 0;
-    int zero = 0;
-    int cost = 0;
-    for(int i=0; i<s.size(); i++){
-        if(s[i] == '1') one++;
-        if(s[i] == '0') zero++;
-    }
-    for(int i=0; i<s.size(); i++){
-        if(s[i] == '0'){
-            if(one > 0){
-                one--;
-            }else{
-                break;
-            }
+    deque<char> dq;
+    map<char, ll> mp;
+    for(int i = 0; i < s.size(); i++){
+        mp[s[i]]++;
+        dq.push_back(s[i]);
+    }   
+    string t;
+    for(int i = 0; i < s.size(); i++){
+        if(s[i] == '0' && mp['1'] > 0){
+            mp['1']--;
+            t.push_back('1');
         }
-        if(s[i] == '1'){
-            if(zero > 0){
-                zero--;
-            }else{
-                break;
-            }
+        if(s[i] == '1' && mp['0'] > 0){
+            mp['0']--;
+            t.push_back('0');
         }
     }
-    cout << one + zero << nl;
+    //cout << t << nl;
+
+    for(int i = 0; i < t.size(); i++){
+        if(t[i] == s[i]){
+            break;
+        }else{
+            dq.pop_front();
+        }
+    }
+    cout << dq.size() << nl;
 }
+
+/* Hey you should check this out
+    * int overflow, array bounds
+    * reset global array and variable
+    * look for special cases (n=1?)
+    * do something instead of nothing and stay organized
+    * bruteforce to find pattern
+    * DON'T GET STUCK ON ONE APPROACH
+    * Think the problem backwards
+    * In practice time don't see failing test case
+*/
 
 signed main(){
     ios_base::sync_with_stdio(false);

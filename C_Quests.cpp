@@ -5,30 +5,54 @@ using namespace std;
 #define YES cout << "YES\n"
 #define NO cout << "NO\n"
 #define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
 #define mod 1000000007
 const int N = 1e5 + 7;
+const int INF = 1e9 + 10;
 
 void solve(){
     ll n, k;
     cin >> n >> k;
-    vector<ll> arr(n+1);
-    vector<ll> brr(n+1);
-    for(int i=1; i<=n; i++) cin >> arr[i];
-    for(int i=1; i<=n; i++) cin >> brr[i];
-    ll ans = 0;
-    ll mx = -1;
-    ll sum = 0;
-    ll temp_ans = 0;
-    for(int i=1; i<=n && k>=i; i++){
-        sum += arr[i];
-        temp_ans += sum;
-        mx = max(mx, brr[i]);
-        temp_ans += mx*(k-i);
-        ans = max(temp_ans, ans);
-        temp_ans = 0;
-    }   
+    ll mx = llmn;
+    vector<ll> arr(n + 1), brr(n + 1);
+    for(int i = 1; i <= n; i++) cin >> arr[i];
+    for(int i = 1; i <= n; i++) cin >> brr[i];
+
+    vector<ll> pref(n + 1);
+    pref[0] = 0;
+    arr[0] = 0;
+    for(int i = 1; i <= n; i++){
+        pref[i] = pref[i - 1] + arr[i];
+    }
+
+    ll exp = 0;
+    ll secondary_max = brr[1];
+    ll ans = llmn;
+    for(int i = 1; i <= k; i++){
+        if(i <= n){
+            exp = pref[i];
+            secondary_max = max(secondary_max, brr[i]);
+            exp += secondary_max * (k - i);
+            ans = max(ans, exp);
+            exp -= secondary_max * (k - i);
+        }else{
+            break;
+        }
+    }
     cout << ans << nl;
 }
+
+/* Hey you should check this out
+    * int overflow, array bounds
+    * reset global array and variable
+    * look for special cases (n=1?)
+    * do something instead of nothing and stay organized
+    * bruteforce to find pattern
+    * DON'T GET STUCK ON ONE APPROACH
+    * Think the problem backwards
+    * In practice time don't see failing test case
+*/
 
 signed main(){
     ios_base::sync_with_stdio(false);

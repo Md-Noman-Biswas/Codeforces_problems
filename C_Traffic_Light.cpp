@@ -5,30 +5,47 @@ using namespace std;
 #define YES cout << "YES\n"
 #define NO cout << "NO\n"
 #define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
 #define mod 1000000007
 const int N = 1e5 + 7;
 
 void solve(){
-    int n;
+    ll n;
     char c;
     cin >> n >> c;
     string s;
     cin >> s;
-    string ss = s + s;
-    int ans = 0;
-    int cnt;
-    for(int i=0; i<n; i++){
-        if(ss[i] == c){
-            cnt = 0;
-            while(ss[i] != 'g' && i < 2*n){
-                cnt++;
-                i++;
-            }
+    string xd;
+    for(int i = 0; i < s.size(); i++){
+        xd.push_back(s[i]);
+        if(s[i] == 'g') break;
+    }
+    s += xd;
+    ll ind = -1;
+    ll ans = llmn;
+    for(int i = s.size() - 1; i >= 0; i--){
+        if(s[i] == 'g'){
+            ind = i;
         }
-        ans = max(cnt, ans);
+        if(s[i] == c){
+            ll diff = ind - i;
+            ans = max(ans, diff);
+        }
     }
     cout << ans << nl;
 }
+
+/* Hey you should check this out
+    * int overflow, array bounds
+    * reset global array and variable
+    * look for special cases (n=1?)
+    * do something instead of nothing and stay organized
+    * bruteforce to find pattern
+    * DON'T GET STUCK ON ONE APPROACH
+    * Think the problem backwards
+    * In practice time don't see failing test case
+*/
 
 signed main(){
     ios_base::sync_with_stdio(false);

@@ -2,39 +2,57 @@
 using namespace std;
 #define ll long long
 #define nl "\n"
-const int N = 1e6+10;
-ll n, x;
-vector<ll> arr(N);
+#define YES cout << "YES\n"
+#define NO cout << "NO\n"
+#define pb push_back
+#define llmx LONG_LONG_MAX
+#define llmn LONG_LONG_MIN
+#define mod 1000000007
+const int N = 1e5 + 7;
+const int INF = 1e9 + 10;
 
-bool predicate(ll mid){
+bool predicate(vector<ll> &arr, ll mid, ll k){
     ll water = 0;
-    for(int i=0; i<n; i++){
-        if(arr[i] < mid){
+    for(int i = 0; i < arr.size(); i++){
+        if(mid - arr[i] > 0){
             water += mid - arr[i];
         }
     }
-    return water <= x;
+    return water <= k;
 }
 
-
 void solve(){
-    cin >> n >> x;
-    for(int i=0; i<n; i++) cin >> arr[i];
+    ll n, k;
+    cin >> n >> k;
+    vector<ll> arr(n);
+    for(int i = 0; i < n; i++) cin >> arr[i];   
+    sort(arr.begin(), arr.end());
+
     ll l = 0;
-    ll h = 1e10;
+    ll r = 1e10;
     ll ans = 0;
-    while(l <= h){
-        ll mid = l + (h-l)/2;
-        if(predicate(mid)){
+    while(l <= r){
+        ll mid = (l + r) / 2;
+        if(predicate(arr, mid, k)){
             ans = mid;
             l = mid + 1;
         }else{
-            h = mid - 1;
+            r = mid - 1;
         }
     }
     cout << ans << nl;
 }
 
+/* Hey you should check this out
+    * int overflow, array bounds
+    * reset global array and variable
+    * look for special cases (n=1?)
+    * do something instead of nothing and stay organized
+    * bruteforce to find pattern
+    * DON'T GET STUCK ON ONE APPROACH
+    * Think the problem backwards
+    * In practice time don't see failing test case
+*/
 
 signed main(){
     ios_base::sync_with_stdio(false);
